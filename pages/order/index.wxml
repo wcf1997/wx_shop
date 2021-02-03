@@ -1,0 +1,45 @@
+<Tabs tabs="{{tabs}}" bindtabsItemChange="tabsItemChange" />
+
+<view class="container">
+  
+  <view class="no-order" wx:if="{{ orders.length < 1}}">
+    <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3334466282,826560232&fm=26&gp=0.jpg" mode="widthFix" class="no-order-img"></image>
+    <view class="text">暂无订单</view>
+  </view>
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="a-order" wx:for="{{orders}}" wx:key="order_number" wx:for-item="item" wx:for-index="index">
+      <navigator url="/pages/order-details/index?id={{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd" style="display:inline-block">订单号:{{item.order_num}}</view>
+        <view class="weui-cell__ft {{item.status === 1? 'active' : ''}}" style="float:right">{{item.statusCN}}</view>
+      </navigator>
+      <scroll-view class="goods-img-container" scroll-x="true">
+        <view class="img-box" wx:for="{{item.goods}}" wx:for-item="item2" wx:for-index="index2" wx:key="goods_id">
+          <image src="{{item2.goods_small_logo}}" class="goods-img"></image>
+        </view>
+      </scroll-view>
+      <view class="goods-price">
+        共 {{item.totalNum}} 件商品 合计：
+        <text class="p" >¥ {{item.totalPrice}}</text>
+      </view>
+      <view class="goods-info">
+        <view class="goods-des">
+          <view>{{item.create_time_CN}}</view>
+        </view>
+      </view>
+      <view class="price-box">
+        <view class="btn" hidden="{{item.pay_status === 1? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">
+          取消订单
+        </view>
+        <view class="btn active" hidden="{{item.pay_status == 2? false : true}}" bindtap="toPayTap" data-id="{{item.id}}"
+         data-money="{{item.amountReal}}" data-score="{{item.score}}">
+          马上付款
+        </view>
+        <view class="btn active" hidden="{{item.pay_status === 3 ? false : true}}" bindtap="refundApply" data-id="{{item.id}}" data-amount='{{item.amountReal}}'>
+          退换货
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="safeAreaOldMarginBttom safeAreaNewMarginBttom"></view>
+</view>
+<float-menu />

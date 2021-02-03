@@ -1,0 +1,7 @@
+/* pages/auth/index.wxss */
+button {
+    width: 70%;
+    font-weight: normal;
+    margin-top: 40rpx;
+  
+}

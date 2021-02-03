@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "Tabs" : "../../components/tabs/Tabs"},
+  "navigationBarTitleText": "收藏中心"
+}

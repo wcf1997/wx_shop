@@ -1,0 +1,4 @@
+{
+  "usingComponents": {"Tabs":"../../components/tabs/Tabs",
+    "UpImg":"../../components/upImg/UpImg"}
+}
